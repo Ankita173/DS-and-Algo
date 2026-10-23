@@ -1,0 +1,112 @@
+There are N number of IoT devices managed by its own services, For example CCTV Cameras are managed by its own service, Elevators are managed by its own services etc..
+Each of these services represent the status (like Connectivity, health) of device in their own scheme. For customer who has these setups in their office/factory are interested
+managing them from  single view.  For that purpose design a scalable service which generates unified data model from different services and enables the UX to render it in
+single view to enable customer to manage his/her setup seamlessly.
+
+Type of devices:
+CCTV -  conected, disconnected, recently connected, certificated expired
+elevator - conected, disconnected
+
+Type of data:
+Connectivity, health, alerts
+
+
+
+commo format:
+on: active connected
+off: inactive
+problem: any error, malfunction
+
+
+CCTV data - stream of data (kakfa service)
+
+kafka consumers based of different type device and data
+
+input status mapped to common format
+input:
+{
+id: device1
+typeOfDevice: cctv
+typeOfData: Connectivity
+status:  connected
+}
+
+service(List<Inputs>)
+
+
+mapping:
+on : connected, up, healty, ok
+off:
+
+
+
+
+
+
+
+
+
+
+public interface IMessageReceiver
+{
+	void send(string msg);
+}
+
+public interface IMessageService
+{
+	void Register(IMessageReceiver receiver);
+}
+
+public class MessageService : IMessageService
+{
+	private static IMessageService msgSender=null;
+	private List<IMessageReceiver> receivers=new List<IMessageReceiver>();
+
+	public static IMessageService GetInstance()
+	{
+			if(msgSender==null)
+			{
+				msgSender=new MessageService();
+			}
+			return msgSender;
+	}
+
+	public	void Register(IMessageReceiver receiver)
+	{
+		receivers.Add(receiver);
+	}
+
+	public void Publish(string msg)
+	{
+		foreach(var rc in receivers)
+		{
+			rc.send(msg);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

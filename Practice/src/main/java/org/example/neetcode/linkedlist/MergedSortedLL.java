@@ -31,7 +31,7 @@ public class MergedSortedLL {
             tail2.setNext(n);
             tail2 = tail2.getNext();
         }
-        SinglyLinkedList mergeTwoLists = mergeTwoLists(head1, head2);
+        SinglyLinkedList mergeTwoLists = merge(head1, head2);
         while (mergeTwoLists != null) {
             System.out.println(mergeTwoLists.getVal());
             mergeTwoLists = mergeTwoLists.getNext();
@@ -70,5 +70,26 @@ public class MergedSortedLL {
                 mergedTail.setNext(list2);
         }
         return mergedHead;
+    }
+
+    public static SinglyLinkedList merge(SinglyLinkedList list1, SinglyLinkedList list2) {
+        SinglyLinkedList head = new SinglyLinkedList(-1);
+        SinglyLinkedList curr = head;
+        while (list1 != null && list2 != null) {
+            if (list1.getVal() < list2.getVal()) {
+                curr.next = list1;
+                list1 = list1.next;
+            } else {
+                curr.next = list2;
+                list2 = list2.next;
+            }
+            curr = curr.next;
+        }
+
+        if (list1 != null)
+            curr.next = list1;
+        else curr.next = list2;
+
+        return head.next;
     }
 }

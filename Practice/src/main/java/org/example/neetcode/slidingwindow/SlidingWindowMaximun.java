@@ -12,6 +12,7 @@ public class SlidingWindowMaximun {
     }
     static int[] maxSlidingWindow(int[] nums, int k) {
         int ans[] = new int[nums.length - k + 1];
+//        double d = MIN_Value;
         Deque<Integer> maxInWindow = new ArrayDeque<>();
         int i = 0, j = 0;
         while(j < nums.length) {

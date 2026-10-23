@@ -2,7 +2,7 @@ package org.example.datastructure;
 
 public class SinglyLinkedList {
     int val;
-    SinglyLinkedList next;
+    public SinglyLinkedList next;
     public SinglyLinkedList(int val) {
         this.val = val;
     }

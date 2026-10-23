@@ -2,7 +2,7 @@ package org.example.neetcode.dp1d;
 
 public class LongestSubstringPalindrome {
     public static void main(String[] args) {
-        System.out.println(longestPalindrome("babad"));
+        System.out.println(longestPalindrome2("a"));
     }
 
     public static String longestPalindrome(String s) {
@@ -27,5 +27,28 @@ public class LongestSubstringPalindrome {
             }
         }
         return longest;
+    }
+
+
+    public static String longestPalindrome2(String s) {
+        int maxlen = 0, l, r;
+        String result = "";
+
+        for (int i = 0; i < s.length(); i++) {
+            for(l = i, r = i; l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r); l--, r++) {
+                if (maxlen < (r - l + 1)) {
+                    maxlen = r - l + 1;
+                    result = s.substring(l, r+1);
+                }
+            }
+
+            for (l = i, r = i+1; l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r); l--, r++) {
+                if (maxlen < (r - l + 1)) {
+                    maxlen = r - l + 1;
+                    result = s.substring(l, r+1);
+                }
+            }
+        }
+        return result;
     }
 }

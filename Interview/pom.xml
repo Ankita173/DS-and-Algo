@@ -7,7 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Interview</name>
+  <name>org.example.tesco.Interview</name>
   <url>http://maven.apache.org</url>
 
   <properties>
